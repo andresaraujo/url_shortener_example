@@ -1,0 +1,15 @@
+web:
+  build: app
+  #restart: always
+  volumes:
+    - "app:/app"
+    #- "app/packages"
+  ports:
+    - "80:8080"
+  links:
+   - redis
+  command: bash -c "pub get && /usr/bin/dart bin/server.dart"
+redis:
+    image: redis:latest
+    ports:
+    - "6379:6379"
